@@ -11,33 +11,20 @@ class ProfileController extends Controller
     /**
      * Display the specified resource.
      */
-    public function index()
-    {
-        // --- 1. Fetch the Cat Fact ---
-        $catFact = 'Could not fetch a cat fact at this time. Please try again later.'; // Default fallback message
-        try {
-            $response = Http::timeout(5)->get('https://catfact.ninja/fact');
-
-            if ($response->successful()) {
-                $catFact = $response->json()['fact'];
-            }
-        } catch (\Exception $e) {
-            
-        }
-
-        
-        $data = [
-            'status' => 'success',
-            'user' => [
-                'email' => env('MY_EMAIL', 'uchedivine65@gmail.com.com'),
-                'name' => env('MY_NAME', 'Asogwa Uchechukwu Divine'),
-                'stack' => env('MY_STACK', 'PHP/Laravel'),
-            ],
-            'timestamp' => Carbon::now()->toIso8601String(), // Get current UTC time in ISO 8601
-            'fact' => $catFact,
-        ];
-
-       
-        return response()->json($data);
+ public function index()
+{
+    try {
+        $response = Http::timeout(5)->get('https://catfact.ninja/fact');
+        $catFact = $response->successful() ? $response->json()['fact'] : 'Could not fetch a cat fact.';
+    } catch (\Exception $e) {
+        $catFact = 'Could not fetch a cat fact.';
     }
+
+    return response()->json([
+        'email' => env('MY_EMAIL', 'uchedivine65@gmail.com'),
+        'current_datetime' => now()->toIso8601String(),
+        'fact' => $catFact
+    ], 200, ['Content-Type' => 'application/json']);
+}
+
 }
