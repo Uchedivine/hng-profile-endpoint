@@ -22,12 +22,10 @@ class ProfileController extends Controller
                 $catFact = $response->json()['fact'];
             }
         } catch (\Exception $e) {
-            // The API call failed (e.g., timeout, network error).
-            // The default fallback message will be used.
-            // You could also log the error here: Log::error($e->getMessage());
+            
         }
 
-        // --- 2. Prepare the Response Data ---
+        
         $data = [
             'status' => 'success',
             'user' => [
@@ -39,7 +37,7 @@ class ProfileController extends Controller
             'fact' => $catFact,
         ];
 
-        // --- 3. Return the JSON Response ---
+       
         return response()->json($data);
     }
 }
