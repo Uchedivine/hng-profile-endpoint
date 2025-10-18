@@ -55,8 +55,8 @@ To run this project locally, follow these steps:
 
 4.  **Add your personal information** to the `.env` file:
     ```env
-    MY_NAME="Your Full Name"
-    MY_EMAIL="your.email@example.com"
+    MY_NAME="Asogwa Uchechukwu Divine"
+    MY_EMAIL="uchedivine65@gmail.com.com"
     MY_STACK="PHP/Laravel"
     ```
 
