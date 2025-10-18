@@ -1,0 +1,21 @@
+services:
+  - type: web
+    name: hng-profile-endpoint
+    env: php
+    plan: free
+    buildCommand: |
+      composer install
+      php artisan key:generate
+    startCommand: |
+      php artisan serve --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: APP_KEY
+        value: base64:uZHRd7BMy0uEikStLotH8IDRnvnZDObsjGNiCBFilr0=
+      - key: APP_ENV
+        value: production
+      - key: APP_DEBUG
+        value: false
+      - key: APP_URL
+        value: https://hng-profile-endpoint.onrender.com
+      - key: MY_EMAIL
+        value: Uchedivine65@gmail.com
